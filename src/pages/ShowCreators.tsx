@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../client";
 import Card, { type Creator } from "../components/Card";
+import { Link } from "react-router-dom";
 
 function ShowCreators() {
    const [creators, setCreators] = useState<Creator[]>([]);
@@ -19,7 +20,7 @@ function ShowCreators() {
    return (
       <div>
          <h1>Creatorverse</h1>
-
+         <Link to="/new">Add Creator</Link>
          {creators.length > 0 ? (
             creators.map((creator) => (
                <Card key={creator.id} creator={creator} />
