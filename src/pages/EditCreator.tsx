@@ -35,6 +35,15 @@ function EditCreator() {
       setCreator((prev) => ({ ...prev, [e.target.name]: e.target.value }));
    };
 
+   const handleDelete = async () => {
+      const { error } = await supabase.from("creators").delete().eq("id", id);
+      if (error) {
+         console.error(error);
+      } else {
+         navigate("/");
+      }
+   };
+
    const handleSubmit = async (e: React.SubmitEvent) => {
       e.preventDefault();
       const { error } = await supabase
@@ -87,6 +96,9 @@ function EditCreator() {
                />
             </label>
             <button type="submit">Update Creator</button>
+            <button type="button" onClick={handleDelete}>
+               Delete Creator
+            </button>
          </form>
       </div>
    );
