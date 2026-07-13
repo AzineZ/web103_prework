@@ -1,13 +1,34 @@
-// ShowCreators page — displays all content creators on the home page.
-// Reading from the database and rendering Cards is done in Step 5.
+import { useState, useEffect } from "react";
+import { supabase } from "../client";
+import Card, { type Creator } from "../components/Card";
 
 function ShowCreators() {
-  return (
-    <div>
-      <h1>Creatorverse</h1>
-      {/* Creator cards will be rendered here in Step 5 */}
-    </div>
-  )
+   const [creators, setCreators] = useState<Creator[]>([]);
+   useEffect(() => {
+      const fetchCreators = async () => {
+         const { data, error } = await supabase.from("creators").select();
+         if (error) {
+            console.error(error);
+         } else {
+            setCreators(data);
+         }
+      };
+      fetchCreators();
+   }, []);
+
+   return (
+      <div>
+         <h1>Creatorverse</h1>
+
+         {creators.length > 0 ? (
+            creators.map((creator) => (
+               <Card key={creator.id} creator={creator} />
+            ))
+         ) : (
+            <p>No creators yet. Add one to begin!</p>
+         )}
+      </div>
+   );
 }
 
-export default ShowCreators
+export default ShowCreators;
