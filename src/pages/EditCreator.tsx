@@ -1,13 +1,95 @@
-// EditCreator page — lets the user update a content creator's information.
-// The form, data loading, update, and delete logic are done in Steps 8 & 9.
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { supabase } from "../client";
 
 function EditCreator() {
-  return (
-    <div>
-      <h1>Edit Creator</h1>
-      {/* Pre-filled form to update name, url, description, imageURL goes here in Step 8 */}
-    </div>
-  )
+   const { id } = useParams();
+   const navigate = useNavigate();
+   const [creator, setCreator] = useState({
+      name: "",
+      url: "",
+      description: "",
+      imageURL: "",
+   });
+
+   useEffect(() => {
+      const fetchCreator = async () => {
+         const { data, error } = await supabase
+            .from("creators")
+            .select()
+            .eq("id", id)
+            .single();
+
+         if (error) {
+            console.error(error);
+         } else {
+            setCreator(data);
+         }
+      };
+      fetchCreator();
+   }, [id]);
+
+   const handleChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+   ) => {
+      setCreator((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+   };
+
+   const handleSubmit = async (e: React.SubmitEvent) => {
+      e.preventDefault();
+      const { error } = await supabase
+         .from("creators")
+         .update(creator)
+         .eq("id", id);
+      if (error) {
+         console.error(error);
+      } else {
+         navigate("/");
+      }
+   };
+   return (
+      <div>
+         <h1>Edit Creator</h1>
+         <form onSubmit={handleSubmit}>
+            <label>
+               Name
+               <input
+                  name="name"
+                  value={creator.name}
+                  onChange={handleChange}
+                  required
+               />
+            </label>
+            <label>
+               URL
+               <input
+                  name="url"
+                  value={creator.url}
+                  onChange={handleChange}
+                  required
+               />
+            </label>
+            <label>
+               Description
+               <textarea
+                  name="description"
+                  value={creator.description}
+                  onChange={handleChange}
+                  required
+               />
+            </label>
+            <label>
+               Image URL (optional)
+               <input
+                  name="imageURL"
+                  value={creator.imageURL}
+                  onChange={handleChange}
+               />
+            </label>
+            <button type="submit">Update Creator</button>
+         </form>
+      </div>
+   );
 }
 
-export default EditCreator
+export default EditCreator;
