@@ -4,7 +4,7 @@ Submitted by: **Phi Nguyen**
 
 About this web app: **Creatorverse is a website for curating your favorite content creators. Browse a gallery of creators, view an individual creator's details, and add, edit, or delete creators. Data is stored in and served from a Supabase (PostgreSQL) database.**
 
-Time spent: **👉🏿 9** hours
+Time spent: **9** hours
 
 ## Required Features
 
@@ -40,11 +40,11 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-👉🏿<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+[YouTube link to website walkthrough](https://www.youtube.com/watch?v=d1Gxc3QhFtw)
 
 <!-- Replace this with whatever GIF tool you used! -->
 
-GIF created with ... 👉🏿 GIF tool here
+Video created with Macbook Screen Recording
 
 <!-- Recommended tools:
 [Kap](https://getkap.co/) for macOS
