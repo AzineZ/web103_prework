@@ -14,16 +14,26 @@ type CardProps = {
 
 function Card({ creator }: CardProps) {
    return (
-      <article>
+      <article className="creator-card">
          {creator.imageURL && <img src={creator.imageURL} alt={creator.name} />}
          <h2>
             <Link to={`/creator/${creator.id}`}>{creator.name}</Link>
          </h2>
          <p>{creator.description}</p>
-         <a href={creator.url} target="_blank" rel="noreferrer">
-            Visit channel
-         </a>
-         <Link to={`/edit/${creator.id}`}>Edit</Link>
+         <div className="card-actions">
+            <a
+               href={creator.url}
+               target="_blank"
+               rel="noreferrer"
+               role="button"
+               className="outline"
+            >
+               Visit channel
+            </a>
+            <Link to={`/edit/${creator.id}`} role="button" className="secondary">
+               Edit
+            </Link>
+         </div>
       </article>
    );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "../client";
 
 function AddCreator() {
@@ -27,7 +27,10 @@ function AddCreator() {
       }
    };
    return (
-      <div>
+      <div className="form-page">
+         <Link to="/" className="back-link">
+            ← Back to all creators
+         </Link>
          <h1>Add a Creator</h1>
          <form onSubmit={handleSubmit}>
             <label>
@@ -65,7 +68,9 @@ function AddCreator() {
                   onChange={handleChange}
                />
             </label>
-            <button type="submit">Add Creator</button>
+            <div className="form-actions">
+               <button type="submit">Add Creator</button>
+            </div>
          </form>
       </div>
    );

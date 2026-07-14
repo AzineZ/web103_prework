@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { supabase } from "../client";
 
 function EditCreator() {
@@ -36,6 +36,7 @@ function EditCreator() {
    };
 
    const handleDelete = async () => {
+      if (!window.confirm("Delete this creator? This cannot be undone.")) return;
       const { error } = await supabase.from("creators").delete().eq("id", id);
       if (error) {
          console.error(error);
@@ -57,7 +58,10 @@ function EditCreator() {
       }
    };
    return (
-      <div>
+      <div className="form-page">
+         <Link to="/" className="back-link">
+            ← Back to all creators
+         </Link>
          <h1>Edit Creator</h1>
          <form onSubmit={handleSubmit}>
             <label>
@@ -95,10 +99,16 @@ function EditCreator() {
                   onChange={handleChange}
                />
             </label>
-            <button type="submit">Update Creator</button>
-            <button type="button" onClick={handleDelete}>
-               Delete Creator
-            </button>
+            <div className="form-actions">
+               <button type="submit">Update Creator</button>
+               <button
+                  type="button"
+                  className="secondary"
+                  onClick={handleDelete}
+               >
+                  Delete Creator
+               </button>
+            </div>
          </form>
       </div>
    );

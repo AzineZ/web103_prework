@@ -13,7 +13,7 @@ function App() {
     { path: '/new', element: <AddCreator /> },
   ])
 
-  return <div className="App">{routes}</div>
+  return <main className="container">{routes}</main>
 }
 
 export default App

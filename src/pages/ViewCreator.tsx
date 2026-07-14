@@ -27,18 +27,27 @@ function ViewCreator() {
    if (!creator) return <p>Loading...</p>;
 
    return (
-      <div>
-         <h1>{creator.name}</h1>
+      <article className="creator-detail">
          {creator.imageURL && <img src={creator.imageURL} alt={creator.name} />}
+         <h1>{creator.name}</h1>
          <p>{creator.description}</p>
-         <a href={creator.url} target="_blank" rel="noreferrer">
+         <a
+            href={creator.url}
+            target="_blank"
+            rel="noreferrer"
+            className="creator-url"
+         >
             {creator.url}
          </a>
-         <div>
-            <Link to={`/edit/${creator.id}`}>Edit</Link>
-            <Link to="/">Back to all creators</Link>
+         <div className="detail-actions">
+            <Link to={`/edit/${creator.id}`} role="button">
+               Edit
+            </Link>
+            <Link to="/" role="button" className="secondary outline">
+               Back to all creators
+            </Link>
          </div>
-      </div>
+      </article>
    );
 }
 

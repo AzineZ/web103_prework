@@ -19,12 +19,21 @@ function ShowCreators() {
 
    return (
       <div>
-         <h1>Creatorverse</h1>
-         <Link to="/new">Add Creator</Link>
+         <header className="page-header">
+            <hgroup>
+               <h1>Creatorverse</h1>
+               <p>A collection of content creators worth following.</p>
+            </hgroup>
+            <Link to="/new" role="button">
+               + Add Creator
+            </Link>
+         </header>
          {creators.length > 0 ? (
-            creators.map((creator) => (
-               <Card key={creator.id} creator={creator} />
-            ))
+            <div className="creator-grid">
+               {creators.map((creator) => (
+                  <Card key={creator.id} creator={creator} />
+               ))}
+            </div>
          ) : (
             <p>No creators yet. Add one to begin!</p>
          )}
